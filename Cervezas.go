@@ -35,7 +35,12 @@ func main() {
     router:=mux.NewRouter() //inicializamos nuestro router
 	router.HandleFunc("/cerveza",getCerveza).Methods("GET")
 	router.HandleFunc("/cerveza",postCerveza).Methods("POST")
-	log.Fatal(http.ListenAndServe(":6000",router))
+	 port:=os.Getenv("PORT")
+	 if port ==""{
+		port="6000"
+	 }
+	  
+	log.Fatal(http.ListenAndServe(":"+port,router))
 }
 
 func getCerveza(w http.ResponseWriter, r *http.Request){
