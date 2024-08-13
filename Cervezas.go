@@ -1,20 +1,21 @@
 package main
 
 import (
-	"database/sql"
+	"database/sql" 
 	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
 	_ "github.com/denisenkom/go-mssqldb"
 	"github.com/gorilla/mux"
+	"os"
 )
 
 //inicializamos nuestras dependencia
  var db *sql.DB
  func initBD(){
 	var err error
-	connectionString:="server=DESKTOP-58HBMDE;user=sserver;password=root;database=Cervezas; connection timeout=30"
+	connectionString:=os.Getenv("connectionString")
 	db,err=sql.Open("sqlserver",connectionString)
 	if err !=nil{
 		log.Fatal("Error en la conexion en la conexion de base de datos",err.Error())
